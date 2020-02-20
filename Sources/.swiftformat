@@ -1,0 +1,21 @@
+# Исключаем поды
+--exclude Pods
+# Настройки опций форматированимя
+--maxwidth 120
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--stripunusedargs closure-only
+--indent 4
+--commas inline
+
+# Отключаем следующие правила:
+--disable void
+
+# Генерируем хедер
+--header "{file}\nCopyright © 2020 PJSC Bank Otkritie. All rights reserved."
+
+# Отключаем отступ
+--ifdef no-indent
+
+--swiftversion 5.1
