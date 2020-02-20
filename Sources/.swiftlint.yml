@@ -1,0 +1,526 @@
+#  Custom rules
+#  ob_void_return:
+#  ob_empty_string:
+#  ob_guard_self:
+#  ob_private_IBAction:
+#  ob_types_String:
+#  ob_types_Int:
+#  ob_types_Bool:
+#  ob_types_Double:
+#  ob_types_Date:
+#  ob_array_Type:
+#  ob_private_IBOutlet:
+#  ob_boolean_redundant_condition:
+#  vboolean_clear_condition:
+#  ob_documentation_ticks:
+#  ob_boolean_in_ternar_return:
+#  ob_unowned:
+#  ob_type_inferred_context:
+#  ob_type_inferred_context2:
+
+#  ob_func_line_breaks:
+#  ob_array_line_breaks:
+
+#  ob_void_block:
+#  ob_custom_void_block:
+#  ob_int_block:
+#  ob_custom_int_block:
+#  ob_bool_block:
+#  ob_custom_bool_block:
+#  ob_string_block:
+#  ob_custom_string_block:
+
+#  ob_block_names:
+#  ob_forced_handlers:
+
+#  ob_view_naming:
+#  ob_textview_naming:
+#  ob_textfield_naming:
+#  ob_stackview_naming:
+#  ob_label_naming:
+#  ob_image_naming:
+#  ob_imageview_naming:
+#  ob_webview_naming:
+#  ob_tableviewcell_naming:
+#  ob_collectionviewcell_naming:
+#  ob_scrollview_naming:
+#  ob_nslayoutconstraint_naming:
+#  ob_instantiate_view_controller:
+#  ob_instantiate_view_controller:
+#  ob_button_naming:
+#  ob_indexpath_naming:
+#  ob_color_naming:
+
+disabled_rules:
+  - identifier_name
+  - superfluous_disable_command
+  - trailing_whitespace # Lines should not have trailing whitespace.
+  - void_return # Returning Void in a function declaration is redundant.
+  - force_unwrapping # Force unwrapping should be avoided.
+
+opt_in_rules:
+  - closure_end_indentation # Closure end should have the same indentation as the line that started it.
+  - closure_spacing # Closure expressions should have a single space inside each brace.
+  - operator_usage_whitespace # Operators should be surrounded by a single whitespace when they are being used.
+  - empty_count # Prefer checking isEmpty over comparing count to zero.
+  - explicit_init # Explicitly calling .init() should be avoided.
+  - first_where # Prefer using .first(where:) over .filter { }.first in collections.
+  - multiline_parameters # Functions and methods parameters should be either on the same line, or one per line.
+  - redundant_nil_coalescing # nil coalescing operator is only evaluated if the lhs is nil, coalescing operator with nil as rhs is redundant
+  - single_test_class # Test files should contain a single QuickSpec or XCTestCase class.
+  - sorted_imports # Imports should be sorted.
+  - switch_case_on_newline # Cases inside a switch should always be on a newline
+  - unneeded_parentheses_in_closure_argument # Parentheses are not needed when declaring closure arguments.
+#  - implicitly_unwrapped_optional # Implicitly unwrapped optionals should be avoided when possible.
+#  - private_outlet # IBOutlets should be private to avoid leaking UIKit to higher layers.
+#  - overridden_super_call # Some overridden methods should always call super
+
+#Исключаем поды из проверки
+excluded:
+  - vendor
+  - Pods
+  - Openbank_siri_ui_tests
+  - Openbank_tests
+  - Modules/GenesysSDK
+  - Generated
+
+  # Стороние компоненты
+  - Modules/LiquidLoader
+  - Modules/PullToRefresh
+
+#Будет ошибка, если варнингов будет более 300 (правило временно отключено)
+#warning_threshold: 300
+
+identifier_name:
+  min_length: 1
+  max_length: 60
+
+#Настройка максимального размера класса
+type_body_length:
+  warning: 600
+  error: 800
+
+#Настройка максимального количества строк в файле (в идеале значения надо снизить)
+file_length:
+  warning: 1000
+  error: 2000
+
+#Настройка максимального количества символов в строке, если это не URL или комментарий (в идеале значения надо снизить)
+line_length:
+  warning: 120
+  error: 120
+  ignores_urls: true
+  ignores_comments: true
+
+#Настройка максимального размера метода
+function_body_length:
+  warning: 40
+  error: 140
+
+#Настройка максимального количества параметров метода
+function_parameter_count:
+  warning: 10
+  error: 10
+
+#Настройка максимального количества параметров в кортеже
+large_tuple:
+  warning: 5
+  error: 5
+
+#Настройка цикломатической сложности
+cyclomatic_complexity:
+  warning: 10
+  error: 40
+
+#Настройка максимальной длины имени
+type_name:
+  max_length:
+    warning: 60
+    error: 100
+
+#Будет ошибка при принудительном касте типов
+force_cast:
+  error
+
+#Будет ошибка при излишних скобках
+control_statement:
+  error
+
+#Будет ошибка при лишнем указании getter-a
+implicit_getter:
+  error
+
+#Будет ошибка, если параметры метода расположены вертикально и не из одной табуляции
+vertical_parameter_alignment:
+  error
+
+#Будет ошибка при отсутствии нужных пробелов при указании возвращаемого значения
+return_arrow_whitespace:
+  error
+
+#Будет ошибка при указании уточненных типов массивов и словарей в устаревших форматах
+syntactic_sugar:
+  error
+
+#Будет ошибка при неиспользовании for_where, когда это возможно
+for_where:
+  error
+
+#Будет ошибка при неверном написании кейсов
+switch_case_on_newline:
+  error
+
+custom_rules:
+  ob_void_return:
+    name: "Неверное использование Void"
+    regex: "([(](Void)?[)] ?-> ?Void)"
+    match_kinds:
+      - typeidentifier
+    message: "Используй '() -> ()'"
+    severity: error
+
+  ob_empty_string:
+    name: "Неверная проверка строки на пустоту"
+    regex: "( == \"\")|(== \"\")|( ==\"\")|(==\"\")|( != \"\")|(!= \"\")|( !=\"\")|(!=\"\")"
+    message: "Используй 'string.isEmpty'"
+    severity: error
+
+  ob_guard_self:
+    name: "Неверное использование guard let self = self"
+    regex: "guard\\s+let\\s+(((?!self).)\\S* = self[ ,]|`self` = self)"
+    message: "Используй 'guard let self = self'"
+    severity: error
+
+  ob_private_IBAction:
+    name: "IBActions должны быть приватными"
+    regex: "@IBAction func"
+    message: "Пиши @IBAction private func"
+    severity: error
+
+  ob_types_String:
+    name: "Лишнее указание типа"
+    regex: "^(?!@IBInspectable)\\s*(var|let)\\s\\w*: String = \""
+    message: "Не указывай тип"
+    severity: error
+
+  ob_types_Int:
+    name: "Лишнее указание типа"
+    regex: "^(?!@IBInspectable)\\s*(var|let)\\s\\w*: Int = \\d"
+    message: "Не указывай тип"
+    severity: error
+
+  ob_types_Bool:
+    name: "Лишнее указание типа"
+    regex: "^(?!@IBInspectable)\\s*(var|let)\\s\\w*: Bool = (true|false)$"
+    message: "Не указывай тип"
+    severity: error
+
+  ob_types_Double:
+    name: "Лишнее указание типа"
+    regex: "^(?!@IBInspectable)\\s*(var|let)\\s\\w*: Double = \\d"
+    message: "Не указывай тип"
+    severity: error
+
+  ob_types_Date:
+    name: "Лишнее указание типа"
+    regex: "(var|let) \\w*: Date = Date\\("
+    message: "Не указывай тип"
+    severity: error
+
+  ob_array_Type:
+    name: "Неверное создание массива"
+    regex: "((var|let) \\w*: \\[\\w*\\] = \\[\\])"
+    message: "var a = [Type]()"
+    severity: error
+
+  ob_private_IBOutlet:
+    name: "Аутлеты должны быть приватными"
+    regex: "(@IBOutlet weak|@IBOutlet var)"
+    message: "Пиши @IBOutlet private var"
+    severity: error
+
+  ob_boolean_redundant_condition:
+    name: "Optional chaining для Bool не рекомендовано"
+    regex: "(?? true)|(?? false)"
+    message: "Используй == true или == false"
+    severity: error
+
+  vboolean_clear_condition:
+    name: "Переусложненное условие"
+    regex: "^(?>(?!(as\\?)|(\\?.)).)*((!= true)|(!= false)).*$"
+    message: "Используй == true или == false или саму перменную в качестве условия"
+    severity: error
+
+  ob_documentation_ticks:
+    name: "Неверный апостроф в документации"
+    regex: "´"
+    message: "Используй '`' вместо '´' для корректной работы документации."
+    match_kinds:
+      - comment
+      - doccomment
+    severity: error
+
+  ob_boolean_in_ternar_return:
+    name: "Возврат Bool из тернарного оператора"
+    regex: "\\? (true : false)|(false : true)"
+    message: "Не используй тернарный оператор для возврата Bool"
+    severity: error
+
+  ob_unowned:
+    name: "Использование unowned"
+    regex: "\\[unowned "
+    message: "Используй 'weak' вместо 'unowned'"
+    severity: error
+
+  ob_type_inferred_context:
+    name: "Лишнее указание типа"
+    regex: "^\\w* *((var)|(let)) \\w+\\:\\s(\\w+)\\s\\=\\s\\4"
+    message: "var a = Class()"
+    severity: error
+
+  ob_type_inferred_context2:
+    name: "Лишнее указание типа"
+    regex: "^(?>(?!(\\w* *((var)|(let)) \\w+))).*: (\\w+) = \\5\\.(\\w+)(?>(?!\\(\\)))"
+    message: "func f(a: UIColor = .red)"
+    severity: error
+
+  ob_func_line_breaks:
+    name: "Переносы при вызове функции"
+    regex: "\\w+\\((\\w+: |)[\\w.|\\[\\]\":$%]+,$"
+    message: "Переносы строк необходимо делать по гайду"
+    severity: error
+
+  ob_array_line_breaks:
+    name: "Переносы при многострочных массивах"
+    regex: "\\[[\\d\\w,.]+,$"
+    message: "Переносы строк для многострочных массивов необходимо делать по гайду"
+    severity: error
+
+  ob_void_block:
+    name: "Используй VoidBlock"
+    regex: "\\( *\\) *-> *\\( *\\)"
+    message: "Вместо () -> () используй VoidBlock"
+    severity: error
+
+  ob_custom_void_block:
+    name: "Используй VoidBlock"
+    regex: "typealias \\w+ = (VoidBlock|\\( *\\) *-> *\\( *\\))"
+    message: "Вместо кастомного typealias используй VoidBlock"
+    severity: error
+    
+  ob_error_block:
+    name: "Используй ErrorBlock"
+    regex: "\\(NSError\\) *-> *\\( *\\)"
+    message: "Вместо (NSError) -> () используй ErrorBlock"
+    severity: error
+
+  ob_custom_error_block:
+    name: "Используй ErrorBlock"
+    regex: "typealias \\w+ = (ErrorBlock|\\(NSError\\) *-> *\\( *\\))"
+    message: "Вместо кастомного typealias используй ErrorBlock"
+    severity: error
+    
+  ob_optional_error_block:
+    name: "Используй OptionalErrorBlock"
+    regex: "\\(NSError\\?\\) *-> *\\( *\\)"
+    message: "Вместо (NSError?) -> () используй OptionalErrorBlock"
+    severity: error
+
+  ob_custom_optional_error_block:
+    name: "Используй OptionalErrorBlock"
+    regex: "typealias \\w+ = (OptionalErrorBlock|\\(NSError\\?\\) *-> *\\( *\\))"
+    message: "Вместо кастомного typealias используй OptionalErrorBlock"
+    severity: error
+    
+  ob_int_block:
+    name: "Используй IntBlock"
+    regex: "\\(Int\\) *-> *\\( *\\)"
+    message: "Вместо (Int) -> () используй IntBlock"
+    severity: error
+
+  ob_custom_int_block:
+    name: "Используй IntBlock"
+    regex: "typealias \\w+ = (IntBlock|\\(Int\\) *-> *\\( *\\))"
+    message: "Вместо кастомного typealias используй IntBlock"
+    severity: error
+    
+  ob_bool_block:
+    name: "Используй BoolBlock"
+    regex: "\\(Bool\\) *-> *\\( *\\)"
+    message: "Вместо (Bool) -> () используй BoolBlock"
+    severity: error
+
+  ob_custom_bool_block:
+    name: "Используй BoolBlock"
+    regex: "typealias \\w+ = (BoolBlock|\\(Bool\\) *-> *\\( *\\))"
+    message: "Вместо кастомного typealias используй BoolBlock"
+    severity: error
+    
+  ob_string_block:
+    name: "Используй StringBlock"
+    regex: "\\(String\\) *-> *\\( *\\)"
+    message: "Вместо (String) -> () используй StringBlock"
+    severity: error
+
+  ob_custom_string_block:
+    name: "Используй StringBlock"
+    regex: "typealias \\w+ = (StringBlock|\\(String\\) *-> *\\( *\\))"
+    message: "Вместо кастомного typealias используй StringBlock"
+    severity: error
+
+  ob_block_names:
+    name: "Нейменг блоков"
+    regex: "(var|let) \\w+(Action|Block): (\\(|\\w+(Block|Action|Handler))"
+    message: "Замыкание должно иметь суффикс Handler"
+    severity: error
+    
+  ob_forced_handlers:
+    name: "Форсанрап хендлеров"
+    regex: "(var|let) \\w+: (\\(*\\w*\\)->\\(\\w*\\)*|\\w+(Block|Action|Handler))!"
+    message: "Вместо var block: Block! используй var block: Block?"
+    severity: error
+
+  ob_view_naming:
+    name: "Неверное объявление UIView"
+    regex: "(?<!(V|v)iew)(:| =)( UIView(\\(|$|\\?|\\!))"
+    message: "У каждого объекта типа UIView должна быть в конце приписка View"
+    severity: error
+  
+  ob_textview_naming:
+    name: "Неверное объявление UITextView"
+    regex: "(?<!(T|t)extView)(:| =)( UITextView(\\(|$|\\?|\\!))"
+    message: "У каждого объекта типа UITextView должна быть в конце приписка TextView"
+    severity: error
+    
+  ob_textfield_naming:
+    name: "Неверное объявление UITextField"
+    regex: "(?<!(T|t)extField)(:| =)( UITextField(\\(|$|\\?|\\!))"
+    message: "У каждого объекта типа UITextField должна быть в конце приписка TextField"
+    severity: error
+    
+  ob_stackview_naming:
+    name: "Неверное объявление UIStackView"
+    regex: "(?<!(S|s)tackView)(:| =)( UIStackView(\\(|$|\\?|\\!))"
+    message: "У каждого объекта типа UIStackView должна быть в конце приписка StackView"
+    severity: error
+    
+  ob_label_naming:
+    name: "Неверное объявление UILabel"
+    regex: "(?<!(L|l)abel)(:| =)( UILabel(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа UILabel должна быть в конце приписка Label"
+    severity: error
+
+  ob_image_naming:
+    name: "Неверное объявление UIImage"
+    regex: "(?<!(I|i)mage)(:| =)( UIImage(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа UIImage должна быть в конце приписка Image"
+    severity: error
+
+  ob_imageview_naming:
+    name: "Неверное объявление UIImageView"
+    regex: "(?<!(I|i)mageView)(:| =)( UIImageView(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа UIImageView должна быть в конце приписка ImageView"
+    severity: error
+    
+  ob_webview_naming:
+    name: "Неверное объявление UIWebView"
+    regex: "(?<!(W|w)ebView)(:| =)( UIWebView(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа UIWebView должна быть в конце приписка WebView"
+    severity: error
+    
+    # TODO: дописать regex
+    #  ob_tableviewcell_naming:
+    #    name: "Неверное объявление UITableViewCell"
+    #    regex: "(?<!(C|c)ell)(:| =)( UITableViewCell(\\(|$|\\?|\\!|,| ))"
+    #    message: "У каждого объекта типа UITableViewCell должна быть в конце приписка Cell"
+    #    severity: error
+    
+  ob_collectionviewcell_naming:
+    name: "Неверное объявление UICollectionViewCell"
+    regex: "(?<!(C|c)ollectionViewCell)(:| =)( UICollectionViewCell(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа UICollectionViewCell должна быть в конце приписка CollectionViewCell"
+    severity: error
+
+  ob_scrollview_naming:
+    name: "Неверное объявление UIScrollView"
+    regex: "(?<!(S|s)crollView)(:| =)( UIScrollView(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа UIScrollView должна быть в конце приписка ScrollView"
+    severity: error
+
+  ob_tableview_naming:
+    name: "Неверное объявление UITableView"
+    regex: "(?<!((T|t)ableView)|(_))(:| =)( UITableView(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа UITableView должна быть в конце приписка TableView"
+    severity: error
+
+  ob_collectionview_naming:
+    name: "Неверное объявление UICollectionView"
+    regex: "(?<!((C|c)ollectionView)|(_))(:| =)( UICollectionView(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа UICollectionView должна быть в конце приписка CollectionView"
+    severity: error
+
+  ob_switch_naming:
+    name: "Неверное объявление UISwitch"
+    regex: "(?<!(Switch)|(_|`))(:| =)( UISwitch(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа UISwitch должна быть в конце приписка Switch"
+    severity: error
+    
+  ob_nslayoutconstraint_naming:
+    name: "Неверное объявление NSLayoutConstraint"
+    regex: "(?<!(C|c)(onstraint|onstraints))(:| =)( NSLayoutConstraint(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа NSLayoutConstraint должна быть в конце приписка Constraint"
+    severity: error
+
+  ob_window_naming:
+    name: "Неверное объявление UIWindow"
+    regex: "(?<!(W|w)indow)(:| =)( UIWindow(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа UIWindow должна быть в конце приписка Window"
+    severity: error
+
+  ob_button_naming:
+    name: "Неверное объявление UIButton"
+    regex: "(?<!(B|b)utton)(:| =)( UIButton(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа UIButton должна быть в конце приписка Button"
+    severity: error
+
+  ob_indexpath_naming:
+    name: "Неверное объявление IndexPath"
+    regex: "(var|let) \\w*(?<!(I|i)ndexPath)(:| =)( IndexPath(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа IndexPath должна быть в конце приписка IndexPath"
+    severity: error
+
+  ob_color_naming:
+    name: "Неверное объявление UIColor"
+    regex: "(var|let) \\w*(?<!(C|c)olor)(:| =)( UIColor(\\(|$|\\?|\\!|,| ))"
+    message: "У каждого объекта типа Color должна быть в конце приписка UIColor"
+    severity: error
+
+  ob_instantiate_view_controller:
+    name: "Использование instantiateViewController запрещено"
+    regex: "instantiateViewController"
+    message: "Используй instantiateController"
+    severity: error
+
+  ob_instantiate_initial_view_controller:
+    name: "Использование instantiateInitialViewController запрещено"
+    regex: "instantiateInitialViewController"
+    message: "Используй initialController"
+    severity: error
+
+  ob_native_date_formatter:
+    name: "Использование нативного DateFormatter запрещено"
+    regex: "((?<!(Open))DateFormatter)"
+    message: "Используй OpenDateFormatter"
+    severity: error
+  ob_guard_conditions:
+    name: "Неверное написание условий guard"
+    regex: " guard [^\\n{#]*,"
+    message: "Если в guard несколько условий, то они должны быть с новых строк. Также нельзя использовать вызов методов с несколькими параметрами"
+    severity: error
+
+  ob_if_conditions:
+    name: "Неверное написание условий if"
+    regex: " if [^\\n{#]*,"
+    message: "Если в if несколько условий, то они должны быть с новых строк. Также нельзя использовать вызов методов с несколькими параметрами"
+    severity: error
+  
