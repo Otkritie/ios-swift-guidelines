@@ -10,6 +10,7 @@
 --commas inline
 
 # Отключаем следующие правила:
+# void - standardizes the use of Void vs an empty tuple () to represent empty argument lists and return values, depending on the --empty option (void (default) or tuple)
 --disable void
 
 # Генерируем хедер

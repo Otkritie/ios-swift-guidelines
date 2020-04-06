@@ -50,6 +50,7 @@
 #  ob_button_naming:
 #  ob_indexpath_naming:
 #  ob_color_naming:
+#  ob_color_literal:
 
 disabled_rules:
   - identifier_name
@@ -137,6 +138,10 @@ type_name:
   max_length:
     warning: 60
     error: 100
+
+#Будет ошибка при неверном написании документации
+orphaned_doc_comment:
+  error
 
 #Будет ошибка при принудительном касте типов
 force_cast:
@@ -512,6 +517,7 @@ custom_rules:
     regex: "((?<!(Open))DateFormatter)"
     message: "Используй OpenDateFormatter"
     severity: error
+    
   ob_guard_conditions:
     name: "Неверное написание условий guard"
     regex: " guard [^\\n{#]*,"
@@ -523,4 +529,18 @@ custom_rules:
     regex: " if [^\\n{#]*,"
     message: "Если в if несколько условий, то они должны быть с новых строк. Также нельзя использовать вызов методов с несколькими параметрами"
     severity: error
+    
+  ob_color_literal:
+    name: "Используй готовые цвета"
+    regex: "#colorLiteral"
+    message: "Существующие цвета можно посмотреть в UIKitApp или в UIColor+Colors.swift. Если цвет новый, то стоит его занести в HEX формате (после согласования с Core-командой)"
+    severity: error
+      
+  ob_add_subviews:
+    name: "Внутри 'addSubviews()' запрещено использование 'addSubview()'"
+    regex: "addSubviews\\(\\) \\{\\n\\s*\\w*.addSubview\\("
+    message: "Используй 'add {}' в декларативном стиле"
+    severity: error
   
+
+
