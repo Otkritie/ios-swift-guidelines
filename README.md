@@ -207,9 +207,9 @@ let colour = "red"
 
 // MARK: - Constants
 
-// MARK: - IBOutlets
-
 // MARK: - Public Properties
+
+// MARK: - Subview Properties
 
 // MARK: - Private Properties
 
@@ -217,12 +217,10 @@ let colour = "red"
 
 // MARK: - Public Methods
 
-// MARK: - IBActions
-
 // MARK: - Private Methods
 
 ```
-> (*)Вместо `UIViewController` вы должны написать другой суперкласс, от которого вы наследуетесь.
+> (*)Вместо `UIViewController` вы должны написать суперкласс, от которого вы наследуетесь.
 
 ### Соответствие протокола
 
